@@ -1,7 +1,341 @@
 @page "/"
+@inject IJSRuntime JSRuntime
 
-<PageTitle>Home</PageTitle>
+<PageTitle>CleverSoft Agency - Professional IT Solutions</PageTitle>
 
-<h1>Hello, world!</h1>
+<!-- Navigation Header -->
+<header class="@(isDarkMode ? "bg-slate-900 border-slate-800" : "bg-white border-gray-200") fixed w-full top-0 z-50 border-b transition-all">
+    <nav class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="_content/Pages.Home/images/cleversoft-brain-@(isDarkMode ? "dark" : "light").svg" 
+                     alt="CleverSoft" 
+                     class="h-12" />
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="@(isDarkMode ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-blue-600") transition">Home</a>
+                <a href="#services" class="@(isDarkMode ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-blue-600") transition">Services</a>
+                <a href="#about" class="@(isDarkMode ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-blue-600") transition">About</a>
+                <a href="#portfolio" class="@(isDarkMode ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-blue-600") transition">Portfolio</a>
+                <a href="#contact" class="@(isDarkMode ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-blue-600") transition">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button @onclick="ToggleTheme" 
+                        class="@(isDarkMode ? "bg-slate-800 text-white" : "bg-gray-100 text-gray-800") p-2 rounded-lg transition"
+                        aria-label="Toggle theme">
+                    @(isDarkMode ? "☀️" : "🌙")
+                </button>
+                <button class="@(isDarkMode ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-600 hover:bg-blue-700") text-white px-6 py-2 rounded-lg transition">
+                    Get Quote
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
 
-Welcome to your new app.
+<!-- Hero Section -->
+<section id="home" class="@(isDarkMode ? "bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900" : "bg-gradient-to-br from-blue-50 to-white") pt-32 pb-20 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-20 left-10 text-9xl animate-pulse">💻</div>
+        <div class="absolute bottom-20 right-10 text-9xl animate-pulse" style="animation-delay: 1s;">🚀</div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <h1 class="@(isDarkMode ? "text-white" : "text-gray-900") text-5xl md:text-6xl font-bold leading-tight">
+                    Innovative IT Solutions for Modern Business
+                </h1>
+                <p class="@(isDarkMode ? "text-gray-300" : "text-gray-600") text-xl">
+                    Transform your digital presence with cutting-edge technology solutions from Miami's premier software agency
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition shadow-lg">
+                        Start Your Project
+                    </button>
+                    <button class="@(isDarkMode ? "bg-slate-800 hover:bg-slate-700 text-white" : "bg-white hover:bg-gray-50 text-gray-800") px-8 py-3 rounded-lg font-semibold transition shadow-lg border @(isDarkMode ? "border-slate-700" : "border-gray-200")">
+                        View Portfolio
+                    </button>
+                </div>
+                <div class="flex items-center space-x-8 pt-6">
+                    <div>
+                        <div class="@(isDarkMode ? "text-white" : "text-gray-900") text-3xl font-bold">500+</div>
+                        <div class="@(isDarkMode ? "text-gray-400" : "text-gray-600") text-sm">Projects</div>
+                    </div>
+                    <div>
+                        <div class="@(isDarkMode ? "text-white" : "text-gray-900") text-3xl font-bold">15+</div>
+                        <div class="@(isDarkMode ? "text-gray-400" : "text-gray-600") text-sm">Years</div>
+                    </div>
+                    <div>
+                        <div class="@(isDarkMode ? "text-white" : "text-gray-900") text-3xl font-bold">98%</div>
+                        <div class="@(isDarkMode ? "text-gray-400" : "text-gray-600") text-sm">Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:block">
+                <img src="_content/Pages.Home/images/cleversoft-brain-@(isDarkMode ? "dark" : "light").svg" 
+                     alt="Hero" 
+                     class="w-full max-w-lg mx-auto animate-float" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="@(isDarkMode ? "bg-slate-900" : "bg-white") py-20">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="@(isDarkMode ? "text-white" : "text-gray-900") text-4xl font-bold mb-4">Our Services</h2>
+            <p class="@(isDarkMode ? "text-gray-400" : "text-gray-600") text-xl max-w-2xl mx-auto">
+                Comprehensive technology solutions tailored to your business needs
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            @foreach (var service in services)
+            {
+                <div class="@(isDarkMode ? "bg-slate-800 border-slate-700" : "bg-gray-50 border-gray-200") border rounded-xl p-6 hover:shadow-2xl transition-all duration-300 group cursor-pointer">
+                    <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">@service.Icon</div>
+                    <h3 class="@(isDarkMode ? "text-white" : "text-gray-900") text-xl font-bold mb-2">@service.Title</h3>
+                    <p class="@(isDarkMode ? "text-gray-400" : "text-gray-600") mb-4">@service.Description</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold inline-flex items-center">
+                        Learn More 
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="@(isDarkMode ? "bg-slate-800" : "bg-gray-50") py-20">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="@(isDarkMode ? "text-white" : "text-gray-900") text-4xl font-bold mb-6">
+                    Why Choose CleverSoft Agency?
+                </h2>
+                <p class="@(isDarkMode ? "text-gray-300" : "text-gray-600") text-lg mb-6">
+                    We're not just another software company. We're your technology partner, committed to driving your digital transformation with innovative solutions and exceptional service.
+                </p>
+                <div class="space-y-4">
+                    @foreach (var feature in features)
+                    {
+                        <div class="flex items-start space-x-4">
+                            <div class="@(isDarkMode ? "bg-blue-900" : "bg-blue-100") text-blue-600 p-3 rounded-lg text-2xl flex-shrink-0">
+                                @feature.Icon
+                            </div>
+                            <div>
+                                <h4 class="@(isDarkMode ? "text-white" : "text-gray-900") font-bold mb-1">@feature.Title</h4>
+                                <p class="@(isDarkMode ? "text-gray-400" : "text-gray-600")">@feature.Description</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="@(isDarkMode ? "bg-slate-900" : "bg-white") p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">500+</div>
+                    <div class="@(isDarkMode ? "text-gray-400" : "text-gray-600")">Completed Projects</div>
+                </div>
+                <div class="@(isDarkMode ? "bg-slate-900" : "bg-white") p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">250+</div>
+                    <div class="@(isDarkMode ? "text-gray-400" : "text-gray-600")">Happy Clients</div>
+                </div>
+                <div class="@(isDarkMode ? "bg-slate-900" : "bg-white") p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">50+</div>
+                    <div class="@(isDarkMode ? "text-gray-400" : "text-gray-600")">Team Members</div>
+                </div>
+                <div class="@(isDarkMode ? "bg-slate-900" : "bg-white") p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">15+</div>
+                    <div class="@(isDarkMode ? "text-gray-400" : "text-gray-600")">Years Experience</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Section -->
+<section id="portfolio" class="@(isDarkMode ? "bg-slate-900" : "bg-white") py-20">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="@(isDarkMode ? "text-white" : "text-gray-900") text-4xl font-bold mb-4">Our Latest Work</h2>
+            <p class="@(isDarkMode ? "text-gray-400" : "text-gray-600") text-xl max-w-2xl mx-auto">
+                Discover how we've helped businesses transform their digital presence
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            @foreach (var project in portfolio)
+            {
+                <div class="group cursor-pointer">
+                    <div class="@(isDarkMode ? "bg-slate-800" : "bg-gray-100") aspect-video rounded-xl mb-4 overflow-hidden relative">
+                        <div class="absolute inset-0 flex items-center justify-center text-6xl">
+                            @project.Icon
+                        </div>
+                        <div class="absolute inset-0 @(isDarkMode ? "bg-slate-900" : "bg-blue-600") opacity-0 group-hover:opacity-90 transition-opacity flex items-center justify-center">
+                            <div class="text-white text-center p-4">
+                                <div class="text-2xl mb-2">@project.Icon</div>
+                                <div class="font-semibold">View Project</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="@(isDarkMode ? "text-white" : "text-gray-900") text-xl font-bold mb-2">@project.Title</h3>
+                    <p class="@(isDarkMode ? "text-gray-400" : "text-gray-600")">@project.Category</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section id="contact" class="@(isDarkMode ? "bg-gradient-to-r from-blue-900 to-blue-700" : "bg-gradient-to-r from-blue-600 to-blue-800") py-20">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-white text-4xl md:text-5xl font-bold mb-6">
+            Ready to Start Your Project?
+        </h2>
+        <p class="text-blue-100 text-xl mb-8 max-w-2xl mx-auto">
+            Let's discuss how we can help transform your business with our innovative technology solutions
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <button class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition shadow-xl">
+                Schedule Consultation
+            </button>
+            <button class="bg-transparent text-white hover:bg-white/10 px-8 py-4 rounded-lg font-bold text-lg transition border-2 border-white">
+                Contact Sales
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="@(isDarkMode ? "bg-slate-950" : "bg-gray-900") text-white py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+                <img src="_content/Pages.Home/images/cleversoft-brain-dark.svg" alt="CleverSoft" class="h-12 mb-4" />
+                <p class="text-gray-400 mb-4">
+                    Leading IT solutions provider in Miami, specializing in web, mobile, and cloud technologies.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition">📘</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">🐦</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">💼</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">📷</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Services</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-white transition">Web Development</a></li>
+                    <li><a href="#" class="hover:text-white transition">Mobile Apps</a></li>
+                    <li><a href="#" class="hover:text-white transition">Cloud Solutions</a></li>
+                    <li><a href="#" class="hover:text-white transition">AI & ML</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Company</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                    <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                    <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Contact</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li>📍 Miami, FL 33101</li>
+                    <li>📞 (305) 555-0123</li>
+                    <li>✉️ hello@cleversoft.com</li>
+                    <li>🕒 Mon-Fri: 9AM-6PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+            <p>© @DateTime.Now.Year CleverSoft Agency. All rights reserved. Made with ❤️ in Miami 🌴</p>
+        </div>
+    </div>
+</footer>
+
+@code {
+    private bool isDarkMode = true;
+
+    private List<ServiceInfo> services =
+    [
+        new ServiceInfo { Icon = "🌐", Title = "Web Development", Description = "Custom web applications built with modern technologies" },
+        new ServiceInfo { Icon = "📱", Title = "Mobile Apps", Description = "Native iOS and Android applications" },
+        new ServiceInfo { Icon = "☁️", Title = "Cloud Solutions", Description = "Scalable cloud infrastructure and migration" },
+        new ServiceInfo { Icon = "🤖", Title = "AI & Machine Learning", Description = "Intelligent automation and data insights" },
+        new ServiceInfo { Icon = "🔒", Title = "Cybersecurity", Description = "Enterprise-grade security solutions" },
+        new ServiceInfo { Icon = "⚡", Title = "DevOps", Description = "CI/CD pipelines and automation" },
+        new ServiceInfo { Icon = "🔄", Title = "Data Migration", Description = "Seamless data transition services" },
+        new ServiceInfo { Icon = "💼", Title = "IT Consulting", Description = "Strategic technology guidance" }
+    ];
+
+    private List<FeatureInfo> features =
+    [
+        new FeatureInfo { Icon = "🏆", Title = "Award Winning", Description = "Recognized for excellence in software development" },
+        new FeatureInfo { Icon = "⚡", Title = "Fast Delivery", Description = "Agile methodology ensures rapid deployment" },
+        new FeatureInfo { Icon = "🤝", Title = "Dedicated Support", Description = "24/7 technical support for all clients" },
+        new FeatureInfo { Icon = "💡", Title = "Innovation", Description = "Cutting-edge technology solutions" }
+    ];
+
+    private List<PortfolioInfo> portfolio =
+    [
+        new PortfolioInfo { Icon = "🏦", Title = "FinTech Platform", Category = "Web Application" },
+        new PortfolioInfo { Icon = "🏥", Title = "Healthcare App", Category = "Mobile Development" },
+        new PortfolioInfo { Icon = "🛍️", Title = "E-Commerce Solution", Category = "Full Stack" },
+        new PortfolioInfo { Icon = "📊", Title = "Analytics Dashboard", Category = "Data Visualization" },
+        new PortfolioInfo { Icon = "🎓", Title = "EdTech Platform", Category = "Cloud Application" },
+        new PortfolioInfo { Icon = "🚗", Title = "Transport Management", Category = "IoT Solution" }
+    ];
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                var savedTheme = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "theme");
+                isDarkMode = savedTheme != "light";
+                StateHasChanged();
+            }
+            catch { }
+        }
+    }
+
+    private async Task ToggleTheme()
+    {
+        isDarkMode = !isDarkMode;
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "theme", isDarkMode ? "dark" : "light");
+        }
+        catch { }
+    }
+
+    private record ServiceInfo
+    {
+        public string Icon { get; init; } = string.Empty;
+        public string Title { get; init; } = string.Empty;
+        public string Description { get; init; } = string.Empty;
+    }
+
+    private record FeatureInfo
+    {
+        public string Icon { get; init; } = string.Empty;
+        public string Title { get; init; } = string.Empty;
+        public string Description { get; init; } = string.Empty;
+    }
+
+    private record PortfolioInfo
+    {
+        public string Icon { get; init; } = string.Empty;
+        public string Title { get; init; } = string.Empty;
+        public string Category { get; init; } = string.Empty;
+    }
+}

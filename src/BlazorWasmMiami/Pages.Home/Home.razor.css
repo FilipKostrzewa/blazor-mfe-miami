@@ -1,0 +1,127 @@
+/* WordPress Theme-Inspired Styles */
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Animations */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 1s ease-out;
+}
+
+.animate-slide-up {
+    animation: slide-up 0.8s ease-out;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Header Navigation */
+header {
+    backdrop-filter: blur(10px);
+}
+
+/* Hero Section Enhancements */
+section {
+    scroll-margin-top: 80px;
+}
+
+/* Service Cards Hover Effect */
+.group:hover {
+    transform: translateY(-5px);
+}
+
+/* Portfolio Hover Effects */
+.group img {
+    transition: transform 0.3s ease;
+}
+
+.group:hover img {
+    transform: scale(1.05);
+}
+
+/* Footer Links */
+footer a {
+    position: relative;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+footer a:hover::after {
+    width: 100%;
+}
+
+/* Smooth transitions for theme switching */
+* {
+    transition-property: background-color, border-color, color;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+/* Prevent transition on buttons for immediate feedback */
+button {
+    transition: all 0.2s ease !important;
+}
+
+/* Custom gradient overlays */
+.gradient-overlay {
+    position: relative;
+}
+
+.gradient-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .animate-float {
+        animation: none;
+    }
+}
