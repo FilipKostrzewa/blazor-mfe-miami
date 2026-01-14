@@ -1,3 +1,7 @@
 <Solution>
   <Project Path="Apps.Wasm/Apps.Wasm.csproj" />
+  <Project Path="Pages.Counter/Pages.Counter.csproj" />
+  <Project Path="Pages.Home/Pages.Home.csproj" />
+  <Project Path="Pages.NotFound/Pages.NotFound.csproj" />
+  <Project Path="Pages.Weather/Pages.Weather.csproj" />
 </Solution>
