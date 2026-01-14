@@ -1,8 +1,18 @@
 ﻿<Router AppAssembly="@typeof(App).Assembly" 
-        AdditionalAssemblies="new[] { typeof(Counter).Assembly, typeof(Home).Assembly, typeof(NotFound).Assembly, typeof(Weather).Assembly }"
+        AdditionalAssemblies="@AdditionalAssemblies"
         NotFoundPage="typeof(NotFound)">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
     </Found>
 </Router>
+
+@code {
+    private static readonly System.Reflection.Assembly[] AdditionalAssemblies = 
+    [
+        typeof(Counter).Assembly,
+        typeof(Home).Assembly,
+        typeof(NotFound).Assembly,
+        typeof(Weather).Assembly
+    ];
+}
